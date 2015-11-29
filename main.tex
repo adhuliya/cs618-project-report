@@ -1,0 +1,31 @@
+%the main text file that includes all the others
+\documentclass[a4paper]{article}
+
+\usepackage{article}
+
+\author{Anshuman Dhuliya\\144050002}
+\title{Imperfectly Nested Loops\\(Section 6.4 and 6.5)}
+
+\includeonly{allsections}
+
+\begin{document}
+
+\maketitle
+
+\noindent
+\rule{\textwidth}{2pt}%
+
+\tableofcontents
+
+\noindent
+\rule{\textwidth}{2pt}%
+
+%\begingroup
+%\let\clearpage\relax
+\include{allsections}
+%\endgroup
+
+\bibliography{references}
+\bibliographystyle{ieeetr}
+
+\end{document}

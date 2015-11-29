@@ -1,0 +1,20 @@
+\section{Introduction}
+This report is an attempt to explain optimizations in presence of imperfectly nested loops in a crisp and clear way. It has been adapted from the sections $6.4$ and $6.5$ of the book \prettyref{bib:allenkennedy}.
+
+\section{A Short Overview}
+When an imperfectly loop nest (\prettyref{sec:imperfectloops}) is encountered, the actions taken can be categorised into the following cases:
+\margintext{An algorithmic approach is discussed ahead}
+\begin{description}
+    \item[Case 1] \emph{When the outermost loop can be parallelized}, parallelize the loop and move further into its body to look for more optimizations.
+    \item[Case 2] If the \emph{outermost loop cannot be parallelized}, then maximally distributing it around the statements in its body, can be an effective transformation. This step will create further loop nests, which may lead to the following cases:
+        \begin{description}
+        \item[Case 2.1] \emph{Perfectly nested loop nests.} In this case use the perfect nest loop optimization algorithm.
+        \item[Case 2.1] \emph{Imperfectly nested loop nests.} This is a result of a \emph{tight recurrence} (a cyclic dependency) involving a statement and an inner loop. In this case it is best to leave the loop sequential and move into its body to look for other optimizations.
+        \end{description}
+    \item[Case 3] \emph{The outer loop can neither be parallelized nor distributed.} Then leave the loop sequential and move into its body to look for other possible optimizations.
+
+\end{description}
+
+\section{What is an Imperfect Loop Nest}\label{sec:imperfectloops}
+
+\section{What is an Imperfect Loop Nest}
