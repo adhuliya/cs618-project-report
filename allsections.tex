@@ -1,20 +1,26 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-This report is an attempt to explain optimizations in presence of imperfectly nested loops in a crisp and clear way. It has been adapted from the sections $6.4$ and $6.5$ of the book \prettyref{bib:allenkennedy}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+This report documents the work done to port the constraint generation plugin from
+\verb+GCC 4.7.2+ to \verb+GCC 5.2.0+. The constraint generation plugin extracts the pointer based constraints from the GIMPLE IR during LTO (Link Time Optimization) phase and dumps them in an output file. These constraints are then used for many other pointer analysis based optimizations developed in-house.
 
-\section{A Short Overview}
-When an imperfectly loop nest (\prettyref{sec:imperfectloops}) is encountered, the actions taken can be categorised into the following cases:
-\margintext{An algorithmic approach is discussed ahead}
-\begin{description}
-    \item[Case 1] \emph{When the outermost loop can be parallelized}, parallelize the loop and move further into its body to look for more optimizations.
-    \item[Case 2] If the \emph{outermost loop cannot be parallelized}, then maximally distributing it around the statements in its body, can be an effective transformation. This step will create further loop nests, which may lead to the following cases:
-        \begin{description}
-        \item[Case 2.1] \emph{Perfectly nested loop nests.} In this case use the perfect nest loop optimization algorithm.
-        \item[Case 2.1] \emph{Imperfectly nested loop nests.} This is a result of a \emph{tight recurrence} (a cyclic dependency) involving a statement and an inner loop. In this case it is best to leave the loop sequential and move into its body to look for other optimizations.
-        \end{description}
-    \item[Case 3] \emph{The outer loop can neither be parallelized nor distributed.} Then leave the loop sequential and move into its body to look for other possible optimizations.
+The rest of the report documents the general approach followed to port the plugin; then the list of contraints detected by the plugin are listed with test cases; then the  pattern of changes observed from \verb+GCC 4.7.2+ to \verb+GCC 5.2.0+ are listed (although not exhaustive); and at last the future work discusses the work remaining.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Approach Followed}\label{sec:appoach-followed}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+This section summarises the approach followed to port the plugin. We believe this might help us to port other (if any) plugins in the future. Some of the methods are specific for this plugin. We tried understanding the code before making changes, but the direct source level changes eventually gave much quicker results. The  basic approachs are enumerated below:
 
-\end{description}
+\begin{enumerate}
+    \item Compilation was the first problem. So we adopted the incremental apporach where we added source code in logical units, files, functions etc. This helped us tackle small number of issues at a time. The functions were added by following the call hirarchy from the top. This helped us include only those functions that were reachable/used. This helped reduce the size of the code drastically.
 
-\section{What is an Imperfect Loop Nest}\label{sec:imperfectloops}
+    \item How to adapt the source code was another problem. Here we compared the tree-ssa-structalias.c in \verb+GCC 4.7.2+ and \verb+GCC 5.2.0+, and most of the differences were straight forward to understand. This worked because, the plugin was an adaptation of tree-ssa-structalias.c in \verb+GCC 4.7.2+.
+\end{enumerate}
 
-\section{What is an Imperfect Loop Nest}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Future Work}\label{sec:future-work}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+    \item The plugin source has to be logically understood.
+    \item A C constraint has to added. The C contraint, where a pointer is assigned an arbitrary integer (other than NULL) is not currently detected by the plugin.
+    \item C++ constraints have to be included.
+\end{enumerate}
