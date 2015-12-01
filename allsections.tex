@@ -45,7 +45,7 @@ The programs have been created with some naming conventions of variables to make
 \end{table}
 
 \subsection{Basic Pointer Constraints}
-Constraints related to pointer(s) to a basic datatypes.
+Constraints related to pointer(s) to basic datatypes.
 \subsubsection{Single Pointer to Integer} Here the pointer is pointing to an integer. It could point to any other basic datatype, generating similar constraints.
 
 \begin{figure}
@@ -54,30 +54,96 @@ Constraints related to pointer(s) to a basic datatypes.
 \caption{test-01.c}
 \end{figure}
 
-\begin{table}
     \begin{center}
-        \begin{tabular}{| m{1cm} | m{2cm} | m{2cm} | m{8cm} |}
-            \hline
-            \textbf{Line} & \textbf{Code} & \textbf{Gimple} & \textbf{Constraint} \\
-            \hline
-            \hline
-            9 & \verb+pi = &i+ & \verb+pi_1 = &i+ & 
-\begin{verbatim}
-Parsed data: index 0, bool 1, block 5,
-assignment index=0 
-LHS: variable id 8, ptr_arith=0, offset 0(), 
-     type 0, name pi,
-RHS: variable id 9, ptr_arith=0, offset 0(), 
-     type 2, name i
-\end{verbatim}
-\\
-            \hline
-        \end{tabular}
-\label{table:test-01-constr}
-\caption{test-01 result output}
-    \end{center}
-\end{table}
+        \begin{longtable}{| m{10ex} | m{75ex} |}
 
+\caption{test-01 constraints\label{table:test-01-constr}} \\
+            \hline
+            \textbf{Tag} & \textbf{Content} \\
+            \hline
+            \hline
+            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi = \&i} \\ \hline
+            GIMPLE & \texttt{pi\_1 = \&i} \\ \hline
+            Constraint & \texttt{LHS: var id 8, ptr\_ arith=0, offset 0(), type 0, name pi\newline RHS: var id 9, ptr\_ arith=0, offset 0(), type 2, name i} \\
+            \hline 
+            \hline
+            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{i = *pi} \\ \hline
+            GIMPLE & \texttt{i.0\_2 = *pi\_1} \\ \hline
+            Constraint & \texttt{Var id 8, name pi, offset 0} \\
+            \hline
+            \hline
+            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi = pi + 1} \\ \hline
+            GIMPLE & \texttt{pi\_3 = pi\_1 + 4} \\ \hline
+            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 32(), type 0, name pi} \\
+            \hline
+            \hline
+            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi = pi - 1} \\ \hline
+            GIMPLE & \texttt{pi\_4 = pi\_3 + -4} \\ \hline
+            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 18446744073709551584(), type 0, name pi} \\
+            \hline
+            \hline
+            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi++} \\ \hline
+            GIMPLE & \texttt{pi\_5 = pi\_4 + 4} \\ \hline
+            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 32(), type 0, name pi} \\
+            \hline
+            \hline
+            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi++} \\ \hline
+            GIMPLE & \texttt{pi\_5 = pi\_4 + 4} \\ \hline
+            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 32(), type 0, name pi} \\
+            \hline
+            \hline
+            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi++} \\ \hline
+            GIMPLE & \texttt{pi\_5 = pi\_4 + 4} \\ \hline
+            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 32(), type 0, name pi} \\
+            \hline
+            \hline
+            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi++} \\ \hline
+            GIMPLE & \texttt{pi\_5 = pi\_4 + 4} \\ \hline
+            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 32(), type 0, name pi} \\
+            \hline
+            \hline
+            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi++} \\ \hline
+            GIMPLE & \texttt{pi\_5 = pi\_4 + 4} \\ \hline
+            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 32(), type 0, name pi} \\
+            \hline
+            \hline
+            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi++} \\ \hline
+            GIMPLE & \texttt{pi\_5 = pi\_4 + 4} \\ \hline
+            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 32(), type 0, name pi} \\
+            \hline
+            \hline
+            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi++} \\ \hline
+            GIMPLE & \texttt{pi\_5 = pi\_4 + 4} \\ \hline
+            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 32(), type 0, name pi} \\
+            \hline
+            \hline
+            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi++} \\ \hline
+            GIMPLE & \texttt{pi\_5 = pi\_4 + 4} \\ \hline
+            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 32(), type 0, name pi} \\
+            \hline
+            \hline
+            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi++} \\ \hline
+            GIMPLE & \texttt{pi\_5 = pi\_4 + 4} \\ \hline
+            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 32(), type 0, name pi} \\
+            \hline
+            \hline
+            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi++} \\ \hline
+            GIMPLE & \texttt{pi\_5 = pi\_4 + 4} \\ \hline
+            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 32(), type 0, name pi} \\
+            \hline
+            \hline
+            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi++} \\ \hline
+            GIMPLE & \texttt{pi\_5 = pi\_4 + 4} \\ \hline
+            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 32(), type 0, name pi} \\
+            \hline
+%            \hline
+%            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{} \\ \hline
+%            GIMPLE & \texttt{} \\ \hline
+%            Constraint & \texttt{
+%            } \\
+%            \hline
+        \end{longtable}
+    \end{center}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
