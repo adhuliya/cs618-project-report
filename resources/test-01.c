@@ -1,7 +1,7 @@
 // This program enumerates the semantically meaningful 
 // statements possible using a single pointer 
 // variable (pointer to int). 
-int* func (int *piFormal);
+int* f (int *piFormal);
 int main() {
     int i = 17;
     int *pi;
@@ -15,11 +15,11 @@ int main() {
     pi--;     
     pi = 0;   
     pi = 17; 
-    func (pi);
+    f (pi);
 
     return 0;
 }
 
-int* func (int *piFormal) {
-    return piFormal;
+int* f (int *pifp) {
+    return pifp;
 }
