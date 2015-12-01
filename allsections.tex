@@ -50,14 +50,36 @@ The programs have been created with some naming conventions of variables to make
 \end{center}
 \end{table}
 
-\subsection{Basic Pointer Constraints}
-Constraints related to pointer(s) to basic datatypes.
-\subsubsection{Single Pointer to Integer} Here the pointer is pointing to an integer. It could point to any other basic datatype, generating similar constraints.
+\subsection{List of Test Programs}
 
 \begin{figure}
 \label{fig:test-01}
 \lstinputlisting[language=C]{resources/test-01.c}
 \caption{test-01.c}
+\end{figure}
+
+\begin{figure}
+\label{fig:test-01}
+\lstinputlisting[language=C]{resources/test-02.c}
+\caption{test-02.c}
+\end{figure}
+
+\begin{figure}
+\label{fig:test-01}
+\lstinputlisting[language=C]{resources/test-03.c}
+\caption{test-03.c}
+\end{figure}
+
+\begin{figure}
+\label{fig:test-01}
+\lstinputlisting[language=C]{resources/test-04.c}
+\caption{test-04.c}
+\end{figure}
+
+\begin{figure}
+\label{fig:test-01}
+\lstinputlisting[language=C]{resources/test-05.c}
+\caption{test-05.c}
 \end{figure}
 
     \begin{center}
@@ -132,79 +154,21 @@ Constraints related to pointer(s) to basic datatypes.
     \end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Change Patterns}\label{sec:change-patterns}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\input{table1}
-% Please add the following required packages to your document preamble:
-% \usepackage{graphicx}
-% \usepackage[table,xcdraw]{xcolor}
-% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
-
-\begin{table}[]
-\centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|}
-\hline
-
-\rowcolor[HTML]{FFFC9E} 
-Sr.No & Description                                                                                                   &                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              \\ 
-
-\hline
-\rowcolor[HTML]{FFFC9E} 
-1     & \begin{tabular}[c]{@{}l@{}}Mapping \\ old macros\\ to \\ new macros\end{tabular}                              & \begin{tabular}[c]{@{}l@{}}\#define VEC(A,B) vec\textless A\textgreater\\ \#define DEF\_VEC\_O(A)\\ \#define DEF\_VEC\_ALLOC\_O(A,B)\\ \#define DEF\_VEC\_P(A)\\ \#define DEF\_VEC\_ALLOC\_P(A,B)\\ \#define FOR\_EACH\_VEC\_ELT1(A,B,C,D) \\ FOR\_EACH\_VEC\_ELT(*B,C,D)\\ \#define FOR\_EACH\_LOOP1(li,loop,C) \\ FOR\_EACH\_LOOP(loop,C)\\ \#define VEC\_length(A,B) (*(B)).length()\\ \#define VEC\_free(A,B,C) (*C).release()\\ \#define VEC\_pop(A,B) (*B).pop()\\ \#define VEC\_index(A,B,C) ((*B){[}C{]})\\ \#define VEC\_empty(A,B) \\ ((*B).length() == 0)\\ \#define VEC\_qsort(A,B,C) \\ ((*B).qsort(C))\\ \#define VEC\_iterate(A,B,C,D) \\ (*B).iterate(C, \&(D))\\ \#define VEC\_safe\_push(A,B,C,D) \\ (*C).safe\_push(D)\\ \#define VEC\_last(A,B) \\ \&((*B){[}(*B).length()-1{]})\\ \#define VEC\_alloc(A,B,C) \\ new vec\textless A\textgreater ()\\ \#define VEC\_replace(T, V, I, V)\\  (*V).{[}(I){]} = (V)\end{tabular} \\ \hline
-
-\rowcolor[HTML]{EFEFEF} 
-2     & \begin{tabular}[c]{@{}l@{}}Change in \\ vector \\ allocation\end{tabular}                                     & \begin{tabular}[c]{@{}l@{}}VEC(constructor\_elt,gc) *v = \\ VEC\_alloc (constructor\_elt, gc, 100);\end{tabular}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \\ \hline
-\rowcolor[HTML]{FFFC9E} 
-      &                                                                                                               & \begin{tabular}[c]{@{}l@{}}vec\textless constructor\_elt\textgreater *v; \\ vec\_alloc (v, 100);\end{tabular}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   \\ \hline
-\rowcolor[HTML]{EFEFEF} 
-3     & \begin{tabular}[c]{@{}l@{}}Change vector \\ length api\end{tabular}                                           & \begin{tabular}[c]{@{}l@{}}VEC(tree, gc) *params;\\ VEC\_length (tree, params);\end{tabular}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    \\ \hline
-\rowcolor[HTML]{FFFC9E} 
-      &                                                                                                               & \begin{tabular}[c]{@{}l@{}}vec\textless tree,va\_gc \textgreater *params;\\ params-\textgreater length ();\end{tabular}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         \\ \hline
-
-\end{tabular}
-}
-\end{table}
-
-% \input{table2}
-% Please add the following required packages to your document preamble:
-% \usepackage{graphicx}
-% \usepackage[table,xcdraw]{xcolor}
-% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
-
-\begin{table}[]
-\centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|}
-\hline
-\rowcolor[HTML]{EFEFEF} 
- 4    & \begin{tabular}[c]{@{}l@{}}Iterating through \\ each basic block \\ of each \\ defined function.\end{tabular} & \begin{tabular}[c]{@{}l@{}}4.7\\ struct cgraph\_node * cnode = NULL;\\ for (cnode = cgraph\_nodes; cnode; \\ cnode = cnode-\textgreater next)\\ \{// skip nodes without a body, and \\ clone nodes,\\    if (!gimple\_has\_body\_p (cnode-\textgreater decl) || \\ cnode-\textgreater clone\_of)\\    continue;\\ \\    push\_cfun(\\ DECL\_STRUCT\_FUNCTION \\ (cnode-\textgreater decl));\\ \\    basic\_block current\_block;\\    FOR\_EACH\_BB (current\_block)\\    print\_parsed\_data (current\_block);\\ \}\end{tabular}                                                                                                                                                                                                                                                                                                                                                                                                               \\ \hline
-\rowcolor[HTML]{FFFC9E} 
-      &                                                                                                               & \begin{tabular}[c]{@{}l@{}}5.2\\ struct cgraph\_node * cnode = NULL;\\ FOR\_EACH\_DEFINED\_FUNCTION (cnode)\\ \{ \\ struct function *func; \\ if(!gimple\_has\_body\_p (cnode-\textgreater decl) ||\\ cnode-\textgreater clone\_of)\\ continue;\\ func=DECL\_STRUCT\_FUNCTION\\ (cnode-\textgreater decl);\\ push\_cfun(func);\\ basic\_block current\_block;\\ FOR\_EACH\_BB\_FN (current\_block,func)\\ print\_parsed\_data (current\_block);\\ \}\end{tabular}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \\ \hline
-
-\rowcolor[HTML]{EFEFEF} 
-5     & \begin{tabular}[c]{@{}l@{}}Change in \\ safe\_push api\end{tabular}                                           & \begin{tabular}[c]{@{}l@{}}4.7 vec\textless tree,va\_gc\textgreater *vec;\\ VEC\_safe\_push (tree\_gc\_vec, gc, \\ tree\_vector\_cache, vec);\end{tabular}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \\ \hline
-\rowcolor[HTML]{FFFC9E} 
-      &                                                                                                               &5.2 vec\_safe\_push (tree\_vector\_cache, vec);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \\ \hline
-\rowcolor[HTML]{EFEFEF} 
-6     & \begin{tabular}[c]{@{}l@{}}Change in \\ getName api\end{tabular}                                              & \begin{tabular}[c]{@{}l@{}}4.7 struct cgraph\_node *new\_node;\\ cgraph\_node\_name (new\_node)\end{tabular}                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-                                                                                                                                                                                                                                                                                       \\ 
-																																																																																																																																											
-																																																																																																																																											                                                                                        
-\rowcolor[HTML]{FFFC9E} 
-      &                                                                                                               & \begin{tabular}[c]{@{}l@{}}5.2 struct cgraph\_node *new\_node; \\ new\_node-\textgreater name ();\end{tabular}
-																																																																																																																																																																																																																															
-																																																																																																																																																																																																																															\\ \hline                                                                                                                                                                                                                                                                                       
-\end{tabular}
-}
-\end{table}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Future Work}\label{sec:future-work}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{enumerate}
     \item The plugin source has to be logically understood.
     \item A C constraint has to added. The C contraint, where a pointer is assigned an arbitrary integer (other than NULL) is not currently detected by the plugin.
-    \item C++ constraints have to be included.
+    \item C++ constraints have to be included too.
 \end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Change Patterns}\label{sec:change-patterns}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The following table lists the significant changes performed on the sourcecode while porting.
+
+\input{table1}
+
+\input{table2}
+

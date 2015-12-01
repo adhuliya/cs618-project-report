@@ -1,7 +1,7 @@
 // This program enumerates the semantically meaningful 
 // statements possible using a single pointer 
 // variable (pointer to int). 
-int* f (int *piFormal);
+int* f (int *pifp);
 int main() {
     int i = 17;
     int *pi;

@@ -3,19 +3,13 @@
 int main() {
     int **ppi;  // ppi = pointer-to pointer-to int
 
-    ppi++;              //YES
-
-    ppi--;              //YES
-
-    ppi = ppi + 1;              //YES
-
-    ppi = ppi - 1;              //YES
-
-    **ppi = 10;             //YES - partially only when "D.2354_6 = *ppi_5"
-
-    *ppi = 0;               //YES
-
-    *ppi = 17;              //NO - However semantically unmeaningful
+    ppi++;       
+    ppi--;        
+    ppi = ppi + 1; 
+    ppi = ppi - 1;  
+    **ppi = 10; 
+    *ppi = 0;  
+    *ppi = 17;
 
     return 0;
 }

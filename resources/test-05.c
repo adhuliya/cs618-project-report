@@ -5,13 +5,10 @@ int main () {
     int **ppiB;
     int i;
 
-    ppiA = ppiB;        //YES
-
-    *ppiA = *ppiB;      //YES = two gimple statements (using a temporary)
-
-    **ppiA = **ppiB;    //YES = four gimple statements
-
-    i = ppiA - ppiB;    //NO
+    ppiA = ppiB;  
+    *ppiA = *ppiB; 
+    **ppiA = **ppiB;
+    i = ppiA - ppiB; 
 
     return 0;
 }

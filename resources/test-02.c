@@ -9,9 +9,7 @@ int main() {
     int i;
 
     piA = piB;      //YES copy pointers
-
     *piA = *piB;    //NO transfer int values
-
     i = piA - piB;  //NO difference of pointers
 
     // i = piA + piB;   // not allowed in C
