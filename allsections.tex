@@ -83,73 +83,60 @@ The programs have been created with some naming conventions of variables to make
 \end{figure}
 
     \begin{center}
-        \begin{longtable}{| m{10ex} | m{75ex} |}
-
-\caption{test-01 constraints\label{table:test-01-constr}} \\
-            \hline
-            \textbf{Tag} & \textbf{Content} \\
-            \hline
-            \hline
-            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi = \&i} \\ \hline
-            GIMPLE & \texttt{pi\_1 = \&i} \\ \hline
-            Constraint & \texttt{LHS: var id 8, ptr\_ arith=0, offset 0(), type 0, name pi\newline RHS: var id 9, ptr\_ arith=0, offset 0(), type 2, name i} \\
-            \hline 
-            \hline
-            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{i = *pi} \\ \hline
-            GIMPLE & \texttt{i.0\_2 = *pi\_1} \\ \hline
-            Constraint & \texttt{Var id 8, name pi, offset 0} \\
-            \hline
-            \hline
-            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi = pi + 1} \\ \hline
-            GIMPLE & \texttt{pi\_3 = pi\_1 + 4} \\ \hline
-            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 32(), type 0, name pi} \\
-            \hline
-            \hline
-            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi = pi - 1} \\ \hline
-            GIMPLE & \texttt{pi\_4 = pi\_3 + -4} \\ \hline
-            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 18446744073709551584(), type 0, name pi} \\
-            \hline
-            \hline
-            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi++} \\ \hline
-            GIMPLE & \texttt{pi\_5 = pi\_4 + 4} \\ \hline
-            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 32(), type 0, name pi} \\
-            \hline
-            \hline
-            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi--} \\ \hline
-            GIMPLE & \texttt{pi\_6 = pi\_5 + -4} \\ \hline
-            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 8, ptr\_arith=1, offset 18446744073709551584(), type 0, name pi} \\
-            \hline
-            \hline
-            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi = 0} \\ \hline
-            GIMPLE & \texttt{pi\_7 = 0B} \\ \hline
-            Constraint & \texttt{LHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi,\newline RHS: variable id 2, ptr\_arith=0, offset 0(), type 2, name null} \\
-            \hline
-            \hline
-            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{pi = 17} \\ \hline
-            GIMPLE & \texttt{pi\_8 = 17B} \\ \hline
-            Constraint & \texttt{\textcolor{BrickRed}{No constraint generated}} \\
-            \hline
-            \hline
-            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{f (pi)} \\ \hline
-            GIMPLE & \texttt{f (pi\_8)} \\ \hline
-            Constraint & \texttt{LHS: variable id 7, ptr\_arith=0, offset 0(), type 0, name pifp,\newline RHS: variable id 8, ptr\_arith=0, offset 0(), type 0, name pi} \\
-            \hline
-            \hline
-            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{\ldots} \\ \hline
-            GIMPLE & \texttt{D.2363\_2 = pifp\_1(D)} \\ \hline
-            Constraint & \texttt{LHS: variable id 10, ptr\_arith=0, offset 0(), type 0, name D.2363,\newline RHS: variable id 7, ptr\_arith=0, offset 0(), type 0, name piFormal} \\
-            \hline
-            \hline
-            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{return pifa} \\ \hline
-            GIMPLE & \texttt{return D.2363\_2} \\ \hline
-            Constraint & \texttt{Var id 10, name D.2363, offset 0} \\
-            \hline
-%            \hline
-%            \textcolor{RoyalBlue}{\textbf{Source}} & \texttt{} \\ \hline
-%            GIMPLE & \texttt{} \\ \hline
-%            Constraint & \texttt{
-%            } \\
-%            \hline
+        \begin{longtable}{| m{15ex} | m{30ex} | m{25ex} | m{20ex} | m{10ex}|}
+\caption{Constraints on Expressions\label{table:expr-constr}} \\
+\hline
+\textbf{\textcolor{BrickRed}{Expression}} & \textbf{\textcolor{BrickRed}{Comment}} & \textbf{\textcolor{BrickRed}{Offset}} & \textbf{\textcolor{BrickRed}{Type}} & \textbf{\textcolor{BrickRed}{ptr\_{}arth}}\\ 
+\hline
+\hline
+\textcolor{RoyalBlue}{\textbf{pi}} & 
+&
+\texttt{0} &
+\texttt{0} &
+\texttt{0} \\
+\hline
+\textcolor{RoyalBlue}{\textbf{pi + 4}} & 
+RHS only&
+\texttt{32} &   %offset
+\texttt{0} &    %type
+\texttt{1} \\   %ptr_arth
+\hline
+\textcolor{RoyalBlue}{\textbf{pi + -4}} & 
+RHS only&
+\texttt{18446744073709551584} &   %offset
+\texttt{0} &    %type
+\texttt{1} \\   %ptr_arth
+\hline
+\textcolor{RoyalBlue}{\textbf{*pi}} & 
+Var use&
+\texttt{0} &   %offset
+\texttt{--} &    %type
+\texttt{--} \\   %ptr_arth
+\hline
+\textcolor{RoyalBlue}{\textbf{0}} & 
+NULL assignmt&
+\texttt{0} &   %offset
+\texttt{2} &    %type
+\texttt{0} \\   %ptr_arth
+\hline
+\textcolor{RoyalBlue}{\textbf{17}} & 
+\textcolor{BrickRed}{Not generated} &
+\texttt{--} &   %offset
+\texttt{--} &    %type
+\texttt{--} \\   %ptr_arth
+\hline
+\textcolor{RoyalBlue}{\textbf{f (pi)}} & 
+Is treated as pifp = pi &
+\texttt{--} &   %offset
+\texttt{--} &    %type
+\texttt{--} \\   %ptr_arth
+%\hline
+%\textcolor{RoyalBlue}{\textbf{pi}} & 
+%Comment &
+%\texttt{Offset} &
+%\texttt{type} &
+%\texttt{ptr arth} \\
+\hline
         \end{longtable}
     \end{center}
 
