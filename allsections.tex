@@ -52,6 +52,8 @@ The programs have been created with some naming conventions of variables to make
 
 \subsection{List of Test Programs}
 
+\prettyref{fig:test-01}, \prettyref{fig:test-02}, \prettyref{fig:test-03}, \prettyref{fig:test-04}, \prettyref{fig:test-05}, give the programs used to build the constraints.
+ 
 \begin{figure}
 \label{fig:test-01}
 \lstinputlisting[language=C]{resources/test-01.c}
@@ -59,28 +61,31 @@ The programs have been created with some naming conventions of variables to make
 \end{figure}
 
 \begin{figure}
-\label{fig:test-01}
+\label{fig:test-02}
 \lstinputlisting[language=C]{resources/test-02.c}
 \caption{test-02.c}
 \end{figure}
 
 \begin{figure}
-\label{fig:test-01}
+\label{fig:test-03}
 \lstinputlisting[language=C]{resources/test-03.c}
 \caption{test-03.c}
 \end{figure}
 
 \begin{figure}
-\label{fig:test-01}
+\label{fig:test-04}
 \lstinputlisting[language=C]{resources/test-04.c}
 \caption{test-04.c}
 \end{figure}
 
 \begin{figure}
-\label{fig:test-01}
+\label{fig:test-05}
 \lstinputlisting[language=C]{resources/test-05.c}
 \caption{test-05.c}
 \end{figure}
+
+\subsection{List of Constraints}
+\prettyref{table:expr-constr} gives the list of constraints for each possible expressing.
 
     \begin{center}
         \begin{longtable}{| m{15ex} | m{30ex} | m{25ex} | m{20ex} | m{10ex}|}
@@ -108,25 +113,25 @@ RHS only&
 \texttt{1} \\   %ptr_arth
 \hline
 \textcolor{RoyalBlue}{\textbf{*pi}} & 
-Var use&
+Var use only&
 \texttt{0} &   %offset
 \texttt{--} &    %type
 \texttt{--} \\   %ptr_arth
 \hline
 \textcolor{RoyalBlue}{\textbf{0}} & 
-NULL assignmt&
+RSH only, NULL assignmt&
 \texttt{0} &   %offset
 \texttt{2} &    %type
 \texttt{0} \\   %ptr_arth
 \hline
 \textcolor{RoyalBlue}{\textbf{17}} & 
-\textcolor{BrickRed}{Not generated} &
+RSH only, \textcolor{BrickRed}{Not generated} &
 \texttt{--} &   %offset
 \texttt{--} &    %type
 \texttt{--} \\   %ptr_arth
 \hline
 \textcolor{RoyalBlue}{\textbf{f (pi)}} & 
-Is treated as pifp = pi &
+Same as `pifp = pi' &
 \texttt{--} &   %offset
 \texttt{--} &    %type
 \texttt{--} \\   %ptr_arth
@@ -150,10 +155,10 @@ Is treated as pifp = pi &
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Change Patterns}\label{sec:change-patterns}
+\section{Appendix A : Change Patterns}\label{sec:change-patterns}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The following table lists the significant changes performed on the sourcecode while porting.
+The following table lists the significant changes performed on the sourcecode while porting. (This table is not a complete listing)
 
 \input{table1}
 
